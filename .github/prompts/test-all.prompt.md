@@ -7,3 +7,4 @@ Also test it with the following IP addresses:
 - 78.47.57.244
 - 64.31.63.50
 - 35.152.68.15
+- 52.239.136.22
