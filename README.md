@@ -83,4 +83,3 @@ go test ./...
 - The tool queries the GitHub meta API on startup; subsequent lookups are performed locally without additional network calls.
 - Matching is performed against the CIDR ranges published by GitHub. If an address is not listed, it may still belong to GitHub if their public ranges change between releases—rerun the CLI to refresh the data.
 - Responses are cached under your OS cache directory (for example, `~/Library/Caches/cidr-calculator-github` on macOS). The CLI reuses cached metadata via the ETag header, reducing bandwidth while still refreshing when GitHub publishes new ranges. Delete the cache directory to force a full refetch.
-
