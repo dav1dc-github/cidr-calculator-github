@@ -100,7 +100,7 @@ func TestEvaluateInput_Prefix32Owned(t *testing.T) {
 		evaluateInput(meta, "192.30.252.42/32")
 	})
 
-	if !strings.Contains(output, "evaluated 1 addresses") {
+	if !strings.Contains(output, "evaluated 1 address") {
 		t.Errorf("Expected single address evaluation, got: %s", output)
 	}
 	if !strings.Contains(output, "Owned by GitHub: 1") {
@@ -115,7 +115,7 @@ func TestEvaluateInput_Prefix32NotOwned(t *testing.T) {
 		evaluateInput(meta, "8.8.8.8/32")
 	})
 
-	if !strings.Contains(output, "evaluated 1 addresses") {
+	if !strings.Contains(output, "evaluated 1 address") {
 		t.Errorf("Expected single address evaluation, got: %s", output)
 	}
 	if !strings.Contains(output, "Not owned: 1") {
@@ -130,7 +130,7 @@ func TestEvaluateInput_Prefix128Owned(t *testing.T) {
 		evaluateInput(meta, "2001:db8:1::213/128")
 	})
 
-	if !strings.Contains(output, "evaluated 1 addresses") {
+	if !strings.Contains(output, "evaluated 1 address") {
 		t.Errorf("Expected single address evaluation, got: %s", output)
 	}
 	if !strings.Contains(output, "Owned by GitHub: 1") {
@@ -145,7 +145,7 @@ func TestEvaluateInput_Prefix128NotOwned(t *testing.T) {
 		evaluateInput(meta, "2001:db8:2::1/128")
 	})
 
-	if !strings.Contains(output, "evaluated 1 addresses") {
+	if !strings.Contains(output, "evaluated 1 address") {
 		t.Errorf("Expected single address evaluation, got: %s", output)
 	}
 	if !strings.Contains(output, "Not owned: 1") {
@@ -480,7 +480,7 @@ func TestEvaluateInput_CIDROneAddress(t *testing.T) {
 		evaluateInput(meta, "192.30.252.42/32")
 	})
 
-	if !strings.Contains(output, "evaluated 1 addresses") {
+	if !strings.Contains(output, "evaluated 1 address") {
 		t.Errorf("Expected 1 address to be evaluated, got: %s", output)
 	}
 }

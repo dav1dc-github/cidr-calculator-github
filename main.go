@@ -137,7 +137,11 @@ func evaluateCIDR(meta *githubmeta.MetaData, raw string, prefix netip.Prefix) {
 
 	// Print summary
 	totalCount := ownedCount + nonOwnedCount
-	fmt.Printf("%s -> evaluated %d addresses:\n", raw, totalCount)
+	addressWord := "addresses"
+	if totalCount == 1 {
+		addressWord = "address"
+	}
+	fmt.Printf("%s -> evaluated %d %s:\n", raw, totalCount, addressWord)
 	fmt.Printf("  - Owned by GitHub: %d\n", ownedCount)
 	fmt.Printf("  - Not owned: %d\n", nonOwnedCount)
 
