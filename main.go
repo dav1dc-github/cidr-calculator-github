@@ -103,7 +103,7 @@ func evaluateCIDR(meta *githubmeta.MetaData, raw string, prefix netip.Prefix) {
 	}
 
 	if count > defaultThreshold {
-		fmt.Printf("%s -> CIDR range too large (%d addresses, threshold is %d). Skipping evaluation.\n", 
+		fmt.Printf("%s -> CIDR range too large (%d addresses, threshold is %d). Skipping evaluation.\n",
 			raw, count, defaultThreshold)
 		fmt.Printf("Warning: Large CIDR ranges are not evaluated. Consider using a more specific range or adding a --limit flag in future versions.\n")
 		return
@@ -113,10 +113,10 @@ func evaluateCIDR(meta *githubmeta.MetaData, raw string, prefix netip.Prefix) {
 	ownedCount := 0
 	nonOwnedCount := 0
 	labelSets := make(map[string]int) // label set signature -> count
-	
+
 	addr := prefix.Addr()
 	lastAddr := lastAddrInPrefix(prefix)
-	
+
 	for {
 		labels := meta.Lookup(addr)
 		if len(labels) == 0 {
@@ -140,7 +140,7 @@ func evaluateCIDR(meta *githubmeta.MetaData, raw string, prefix netip.Prefix) {
 	fmt.Printf("%s -> evaluated %d addresses:\n", raw, totalCount)
 	fmt.Printf("  - Owned by GitHub: %d\n", ownedCount)
 	fmt.Printf("  - Not owned: %d\n", nonOwnedCount)
-	
+
 	if len(labelSets) > 0 {
 		fmt.Printf("  - Label distribution:\n")
 		// Sort label sets for consistent output
@@ -149,7 +149,7 @@ func evaluateCIDR(meta *githubmeta.MetaData, raw string, prefix netip.Prefix) {
 			sigs = append(sigs, sig)
 		}
 		sort.Strings(sigs)
-		
+
 		for _, sig := range sigs {
 			fmt.Printf("    - %s: %d addresses\n", sig, labelSets[sig])
 		}
@@ -160,15 +160,15 @@ func evaluateCIDR(meta *githubmeta.MetaData, raw string, prefix netip.Prefix) {
 func lastAddrInPrefix(prefix netip.Prefix) netip.Addr {
 	addr := prefix.Addr()
 	bits := prefix.Bits()
-	
+
 	if addr.Is4() {
 		a := addr.As4()
-		
+
 		// Set all host bits to 1
 		for i := 0; i < 4; i++ {
 			byteStart := i * 8
 			byteEnd := byteStart + 8
-			
+
 			if byteEnd <= bits {
 				// All bits in this byte are network bits, keep as is
 				continue
@@ -182,16 +182,16 @@ func lastAddrInPrefix(prefix netip.Prefix) netip.Addr {
 				a[i] |= mask
 			}
 		}
-		
+
 		return netip.AddrFrom4(a)
 	} else {
 		a := addr.As16()
-		
+
 		// Set all host bits to 1
 		for i := 0; i < 16; i++ {
 			byteStart := i * 8
 			byteEnd := byteStart + 8
-			
+
 			if byteEnd <= bits {
 				// All bits in this byte are network bits, keep as is
 				continue
@@ -205,7 +205,7 @@ func lastAddrInPrefix(prefix netip.Prefix) netip.Addr {
 				a[i] |= mask
 			}
 		}
-		
+
 		return netip.AddrFrom16(a)
 	}
 }
