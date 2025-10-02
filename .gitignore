@@ -1,0 +1,10 @@
+# Binaries
+cidr-calculator
+cidr-calculator-github
+github-ip-checker
+
+# Test binaries
+*.test
+
+# Build artifacts
+dist/

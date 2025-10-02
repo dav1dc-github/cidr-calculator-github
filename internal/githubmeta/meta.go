@@ -105,6 +105,12 @@ func newMetaData(entries []Entry) *MetaData {
 	return &MetaData{entries: copyEntries}
 }
 
+// NewMetaDataForTesting creates a MetaData instance for testing purposes.
+// This should only be used in tests.
+func NewMetaDataForTesting(entries []Entry) *MetaData {
+	return newMetaData(entries)
+}
+
 // Entries exposes a copy of the parsed entries.
 func (m *MetaData) Entries() []Entry {
 	if m == nil {
